@@ -4,9 +4,10 @@ class Tweet:
         self.lang = status.lang
         self.text = status.text
         self.user = status.user.screen_name
+        self.cleaned = self.cleaned()
 
     def isAcceptable(self):
-        return self.lang == "en" and not self.text[0:2] == "RT"
+        return not any(char.isdigit() for char in self.cleaned) and not self.text[0:2] == "RT"
 
     def cleaned(self):
         indexOfAt = self.text.find("@")
