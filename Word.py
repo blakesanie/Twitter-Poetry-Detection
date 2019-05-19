@@ -6,8 +6,8 @@ cmu = cmudict.dict()
 class Word:
 
     def __init__(self, text):
-        self.text = text
-        self.word = self.getWord(text)
+        self.text = text.replace('\n','')
+        self.word = self.getWord(self.text)
         self.numSyllables = self.getNumSyllables(self.word)
 
     def getWord(self, text):
@@ -24,11 +24,15 @@ class Word:
 
     def rhymesWith(self, wordObj):
         entries = cmudict.entries()
-        syllables = [(word, syl) for word, syl in entries if word == self.word]
-        rhymes = []
-        for (word, syllable) in syllables:
-            rhymes += [word for word, pron in entries if pron[-1:] == syllable[-1:]]
-        return wordObj.word in rhymes
+        syllables1 = [(word, syl) for word, syl in entries if word == self.word]
+        #syllables2 = [(word, syl) for word, syl in entries if word == wordObj.word]
+        rhymes1 = []
+        #rhymes2 = []
+        for (word, syllable) in syllables1:
+            rhymes1 += [word for word, pron in entries if pron[-2:] == syllable[-2:]]
+        #for (word, syllable) in syllables2:
+            #rhymes2 += [word for word, pron in entries if pron[-2:] == syllable[-2:]]
+        return wordObj.word in rhymes1# and self.word in rhymes2
 
     def __str__(self):
         return str((self.text,self.word,self.numSyllables))
