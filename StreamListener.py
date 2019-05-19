@@ -3,7 +3,7 @@ from isPoem import isPoem
 from formatPoem import formatPoem
 import tweepy
 from Tweet import Tweet
-#override tweepy.StreamListener to add logic to on_status
+
 class StreamListener(tweepy.StreamListener):
 
     def on_status(self, status):

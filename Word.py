@@ -22,10 +22,6 @@ class Word:
         except:
             return 0 #not found
 
-    # def getSyllables(self, word):
-    #     entries = cmudict.entries()
-    #     return [(word, syl) for word, syl in entries if word == self.word]
-
     def rhymesWith(self, wordObj):
         entries = cmudict.entries()
         syllables = [(word, syl) for word, syl in entries if word == self.word]
