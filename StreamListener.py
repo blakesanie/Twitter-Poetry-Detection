@@ -3,6 +3,7 @@ from utils import *
 import tweepy
 from Tweet import Tweet
 from threading import Timer
+import sys
 
 class StreamListener(tweepy.StreamListener):
 
@@ -12,7 +13,8 @@ class StreamListener(tweepy.StreamListener):
     def setApi(self, api):
         self.api = api
         self.canTweet = True
-        #print("api set")
+        print("api set")
+        sys.stdout.flush()
 
     def on_status(self, status):
         if self.canTweet:
