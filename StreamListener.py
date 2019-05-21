@@ -21,8 +21,8 @@ class StreamListener(tweepy.StreamListener):
                 #print(sent)
                 if isPoem(sent):
                     formatted = formatPoem(sent)
-                    #
                     self.api.update_status("{}\nA life poem by @{}".format(formatted, tweet.user), tweet.id)
+                    self.api.create_favoritie(tweet.id)
                     # self.canTweet = False
                     # timer = Timer(300.0, self.resetCanTweet)
                     # timer.start()
