@@ -12,6 +12,7 @@ class StreamListener(tweepy.StreamListener):
     def setApi(self, api):
         self.api = api
         self.canTweet = True
+        #print("api set")
 
     def on_status(self, status):
         if self.canTweet:
@@ -20,15 +21,11 @@ class StreamListener(tweepy.StreamListener):
                 sent = Sentence(tweet.cleaned)
                 if isPoem(sent):
                     formatted = formatPoem(sent)
-                    print("\n\n")
-                    print("can Tweet")
-                    print(formatted)
-                    print("\nAn accidental poem by @{}\n\n".format(tweet.user))
-                    print(tweet.text)
-                    self.api.update_status("{}\nA life poem by @{}".formatPoem(formatted, tweet.user), tweet.id)
-                    self.canTweet = False
-                    timer = Timer(300.0, self.resetCanTweet)
-                    timer.start()
+                    #
+                    self.api.update_status("{}\nA life poem by @{}".format(formatted, tweet.user), tweet.id)
+                    # self.canTweet = False
+                    # timer = Timer(300.0, self.resetCanTweet)
+                    # timer.start()
 
     def on_error(self, status_code):
         print("Status code: {}".format(status_code))
