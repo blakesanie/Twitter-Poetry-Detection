@@ -1,7 +1,7 @@
 import nltk
 nltk.download('cmudict')
 from nltk.corpus import cmudict
-cmu = cmudict
+cmu = cmudict.dict()
 entries = cmudict.entries()
 level = 2 #1 = semi rhyme, 2 = exact rhyme
 
