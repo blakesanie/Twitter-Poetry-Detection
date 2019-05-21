@@ -1,3 +1,5 @@
+import sys
+
 def syllablesCompatable(totalSyllables):
     return totalSyllables % 4 == 0 and (totalSyllables / 4) >= 4
 
@@ -51,7 +53,8 @@ def isPoem(sent):
     wordsToRhyme = getWordsToRhyme(words, totalSyllables)
     if not len(wordsToRhyme) == 4:
         return False
-    #print(list(word.word for word in wordsToRhyme))
+    print(list(word.word for word in wordsToRhyme))
+    sys.stdout.flush()
     return aabbRhymes(wordsToRhyme) or ababRhymes(wordsToRhyme) or abbaRhymes(wordsToRhyme)
 
 def formatPoem(sent):
