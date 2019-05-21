@@ -2,8 +2,6 @@ from Sentence import Sentence
 from utils import *
 import tweepy
 from Tweet import Tweet
-from threading import Timer
-import sys
 
 class StreamListener(tweepy.StreamListener):
 
@@ -14,13 +12,13 @@ class StreamListener(tweepy.StreamListener):
         self.api = api
         self.canTweet = True
         print("api set")
-        sys.stdout.flush()
 
     def on_status(self, status):
         if self.canTweet:
             tweet = Tweet(status)
             if tweet.isAcceptable():
                 sent = Sentence(tweet.cleaned)
+                #print(sent)
                 if isPoem(sent):
                     formatted = formatPoem(sent)
                     #
@@ -30,7 +28,7 @@ class StreamListener(tweepy.StreamListener):
                     # timer.start()
 
     def on_error(self, status_code):
-        print("Status code: {}".format(status_code))
+        print("Status code from Twitter: {}".format(status_code))
 
     def resetCanTweet(self):
         self.canTweet = True
