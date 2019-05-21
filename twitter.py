@@ -1,4 +1,9 @@
-import keys
+import sys
+try:
+    import keys
+except ImportError:
+    print("on server")
+    sys.stdout.flush()
 import tweepy
 from StreamListener import StreamListener
 from os import environ
