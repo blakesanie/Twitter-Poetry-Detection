@@ -50,11 +50,17 @@ def repeatingWords(wordsToRhyme):
 
 def isPoem(sent):
     words = sent.words
+    if any(word.numSyllables is 0 for word in words):
+        return False
     totalSyllables = sent.totalSyllables
-    if any(word.numSyllables is 0 for word in words) or (not syllablesCompatable(totalSyllables)) or (syllablesContained(words, totalSyllables)):
+    if not syllablesCompatable(totalSyllables):
+        return False
+    if not syllablesContained(words, totalSyllables):
         return False
     wordsToRhyme = getWordsToRhyme(words, totalSyllables)
-    if not len(wordsToRhyme) == 4 or repeatingWords(wordsToRhyme):
+    if not len(wordsToRhyme) == 4:
+        return False
+    if repeatingWords(wordsToRhyme):
         return False
     print(list(word.word for word in wordsToRhyme))
     return aabbRhymes(wordsToRhyme) or ababRhymes(wordsToRhyme) or abbaRhymes(wordsToRhyme)
