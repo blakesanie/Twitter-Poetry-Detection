@@ -39,6 +39,15 @@ def ababRhymes(wordsToRhyme):
 def abbaRhymes(wordsToRhyme):
     return wordsToRhyme[0].rhymesWith(wordsToRhyme[3]) and wordsToRhyme[1].rhymesWith(wordsToRhyme[2])
 
+def repeatingWords(wordsToRhyme):
+    for i in range(len(wordsToRhyme) - 1):
+        for j in range(i+1, len(wordsToRhyme)):
+            word1 = wordsToRhyme[i].word
+            word2 = wordsToRhyme[j].word
+            if word1 == word2:
+                return True
+    return False
+
 def isPoem(sent):
     words = sent.words
     if any(word.numSyllables is 0 for word in words):
@@ -50,6 +59,8 @@ def isPoem(sent):
         return False
     wordsToRhyme = getWordsToRhyme(words, totalSyllables)
     if not len(wordsToRhyme) == 4:
+        return False
+    if repeatingWords(wordsToRhyme):
         return False
     print(list(word.word for word in wordsToRhyme))
     return aabbRhymes(wordsToRhyme) or ababRhymes(wordsToRhyme) or abbaRhymes(wordsToRhyme)
