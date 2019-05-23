@@ -15,11 +15,11 @@ class Tweet:
         indexOfHash = self.text.find("#")
         indexOfLink = self.text.find("http")
         forcedEnd = max(indexOfHash, indexOfLink)
-        endIndex = min(forcedEnd, len(self.text))
+        endIndex = min(forcedEnd, len(self.text)) if forcedEnd > -1 else len(self.text)
         startIndex = 0
         if indexOfAt > -1:
             for i in range(indexOfAt,len(self.text)):
                 if self.text[i] == " ":
-                    startIndex = i
+                    startIndex = i + 1
                     break
         return self.text[startIndex:endIndex]
