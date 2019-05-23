@@ -22,4 +22,4 @@ class Tweet:
                 if self.text[i] == " ":
                     startIndex = i + 1
                     break
-        return self.text[startIndex:endIndex].replace('\n',' ').replace("&amp","&")
+        return self.text[startIndex:endIndex].replace('\n',' ').replace("&amp;","&")
