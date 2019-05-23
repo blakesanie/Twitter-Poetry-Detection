@@ -8,6 +8,7 @@ level = 2 #1 = semi rhyme, 2 = exact rhyme
 class Word:
 
     def __init__(self, text):
+        self.text = text
         self.word = self.getWord(self.text)
         self.numSyllables = self.getNumSyllables(self.word)
         self.rhymes = None #only compute these when needed, expensive process
