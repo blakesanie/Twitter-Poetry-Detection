@@ -17,15 +17,16 @@ class StreamListener(tweepy.StreamListener):
         if self.canTweet:
             tweet = Tweet(status)
             if tweet.isAcceptable():
-                sent = Sentence(tweet.cleaned)
+                sent = Sentence(tweet.oneLine)
                 #print(sent)
                 if isPoem(sent):
                     formatted = formatPoem(sent)
-                    self.api.update_status("{}\nA life poem by @{}".format(formatted, tweet.user), tweet.id)
-                    self.api.create_favorite(tweet.id)
-                    # self.canTweet = False
-                    # timer = Timer(300.0, self.resetCanTweet)
-                    # timer.start()
+                    if formatted != tweet.cleaned: #checks for direct duplicate of tweet text (with \n's)
+                        self.api.update_status("{}\nA #lifepoem by @{}".format(formatted, tweet.user), tweet.id)
+                        self.api.create_favorite(tweet.id)
+                        # self.canTweet = False
+                        # timer = Timer(300.0, self.resetCanTweet)
+                        # timer.start()
 
     def on_error(self, status_code):
         print("Status code from Twitter: {}".format(status_code))
